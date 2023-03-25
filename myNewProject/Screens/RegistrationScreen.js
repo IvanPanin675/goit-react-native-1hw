@@ -1,6 +1,13 @@
 import React, { useState } from "react";
-import { Alert, Button, StyleSheet, Text, TextInput, View } from "react-native";
-
+import {
+  Alert,
+  Button,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from "react-native";
 
 export const RegistrationScreen = () => {
   const [login, setLogin] = useState("");
@@ -16,23 +23,25 @@ export const RegistrationScreen = () => {
   const onSubmit = () => {
     if (!login || !email || !password) {
       Alert.alert(`Потрібно всі поля заповнити`);
-      return
+      return;
     }
     console.log(`Login: ${login}, Email: ${email}, Password: ${password}`);
-    setEmail('');
-    setLogin('');
-    setPassword('')
+    setEmail("");
+    setLogin("");
+    setPassword("");
   };
 
   return (
-      <View style={ styles.form }>
-        <Text>Registaration</Text>
+    <View style={styles.form}>
+      <Text>Registaration</Text>
+      <View style={styles.divinpt}>
         <TextInput
           name="login"
           value={login}
           onChangeText={onHandleLogin}
           placeholder="Login"
           maxLength={40}
+          style={styles.inpt}
         />
         <TextInput
           name="email"
@@ -40,6 +49,7 @@ export const RegistrationScreen = () => {
           onChangeText={onHandleEmail}
           placeholder="Email"
           maxLength={40}
+          style={styles.inpt}
         />
         <TextInput
           name="password"
@@ -48,22 +58,58 @@ export const RegistrationScreen = () => {
           placeholder="Password"
           secureTextEntry={true}
           maxLength={16}
+          style={styles.inpt}
         />
-        <Button onPress={onSubmit} title={"Registration"} />
       </View>
+      <TouchableOpacity style={styles.buttn} onPress={onSubmit}>
+        <Text>Registration</Text>
+      </TouchableOpacity>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   form: {
-
-    flex: 1,
+    // marginHorizontal: 16,
+    // flex: 1,
     height: 549,
+    padding: 16,
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-    paddingBottom: 30
+    backgroundColor: "#ffffff",
+    alignItems: "center",
+    justifyContent: "flex-end",
+    paddingBottom: 30,
+      // marginBottom: 16,
+  },
+    divinpt: {
+    //  flex: 1,
+  
+      marginTop: 33,
+    justifyContent: "center",
+      alignItems: "center",
+    gap: 16,
+  },
+  inpt: {
+    backgroundColor: "#F6F6F6",
+    height: 50,
+    width: 343,
+    // marginBottom: 16,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: "#E8E8E8",
+  },
+  buttn: {
+    //  flex: 1,
+    backgroundColor: "#FF6C00",
+    borderRadius: 100,
+    height: 51,
+    width: 343,
+    marginTop: 43,
+    // marginBottom: 16,
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
