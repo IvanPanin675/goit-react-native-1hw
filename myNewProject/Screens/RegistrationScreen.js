@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import {
   Alert,
-  Button,
+  Image,
+  Keyboard,
   StyleSheet,
   Text,
   TextInput,
@@ -9,7 +10,11 @@ import {
   View,
 } from "react-native";
 
-export const RegistrationScreen = () => {
+export const RegistrationScreen = ({
+  stateShowKeyboard,
+  operationShowKeyboard,
+  togglePage,
+}) => {
   const [login, setLogin] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -32,8 +37,13 @@ export const RegistrationScreen = () => {
   };
 
   return (
-    <View style={styles.form}>
-      <Text>Registaration</Text>
+    <View style={{ ...styles.form, flex: stateShowKeyboard ? 1 : 1.5 }}>
+      <View style={styles.imgContainer}>
+        <Image style={styles.img} />
+        
+      </View>
+
+      <Text style={styles.text}>Registaration</Text>
       <View style={styles.divinpt}>
         <TextInput
           name="login"
@@ -42,6 +52,7 @@ export const RegistrationScreen = () => {
           placeholder="Login"
           maxLength={40}
           style={styles.inpt}
+          onFocus={() => operationShowKeyboard(false)}
         />
         <TextInput
           name="email"
@@ -50,6 +61,7 @@ export const RegistrationScreen = () => {
           placeholder="Email"
           maxLength={40}
           style={styles.inpt}
+          onFocus={() => operationShowKeyboard(false)}
         />
         <TextInput
           name="password"
@@ -59,35 +71,61 @@ export const RegistrationScreen = () => {
           secureTextEntry={true}
           maxLength={16}
           style={styles.inpt}
+          onFocus={() => operationShowKeyboard(false)}
         />
       </View>
-      <TouchableOpacity style={styles.buttn} onPress={onSubmit}>
-        <Text>Registration</Text>
-      </TouchableOpacity>
+      {stateShowKeyboard ? (
+        <>
+          <TouchableOpacity style={styles.buttn} onPress={onSubmit}>
+            <Text>Registration</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => togglePage(false)}>
+            <Text>Уже есть аккаунт? Войти</Text>
+          </TouchableOpacity>
+        </>
+      ) : null}
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   form: {
-    // marginHorizontal: 16,
-    // flex: 1,
-    height: 549,
-    padding: 16,
+    position: "relative",
+    // height: 500,
+    // padding: 16,
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
-    backgroundColor: "#ffffff",
+
+    flex: 1,
+    backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "flex-end",
     paddingBottom: 30,
-      // marginBottom: 16,
   },
-    divinpt: {
+
+  imgContainer: {
+
+  },
+
+  img: {
+    // position: "absolute",
+    width: 120,
+    height: 120,
+    borderRadius: 16,
+    backgroundColor: "#F6F6F6",
+  },
+
+  text: {
+    fontFamily: "Roboto-Regular",
+    fontSize: 30,
+  },
+
+  divinpt: {
     //  flex: 1,
-  
-      marginTop: 33,
+
+    marginTop: 33,
     justifyContent: "center",
-      alignItems: "center",
+    alignItems: "center",
     gap: 16,
   },
   inpt: {
@@ -100,6 +138,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     borderWidth: 1,
     borderColor: "#E8E8E8",
+    padding: 15,
   },
   buttn: {
     //  flex: 1,
