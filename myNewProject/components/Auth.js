@@ -20,11 +20,6 @@ const Auth = () => {
         name="Login"
         component={LoginScreen}
       />
-      <MainStack.Screen
-        options={{ headerShown: false }}
-        name="Home"
-        component={Home}
-      />
     </MainStack.Navigator>
   );
 };

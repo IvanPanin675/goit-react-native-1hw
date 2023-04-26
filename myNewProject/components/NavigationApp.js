@@ -41,7 +41,7 @@ export const NavigationApp = () => {
 
   return (
     <>
-      <NavigationContainer>{!isAuth ? <Home /> : <Auth />}</NavigationContainer>
+      <NavigationContainer>{isAuth ? <Home /> : <Auth />}</NavigationContainer>
     </>
   );
 };

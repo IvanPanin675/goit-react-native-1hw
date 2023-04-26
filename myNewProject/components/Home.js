@@ -30,7 +30,9 @@ const Home = () => {
         showLabel: false,
         activeTintColor: "tomato",
         inactiveTintColor: "gray",
+        backBehavior: "history",
       }}
+      
     >
       <Tabs.Screen name="DefaultScreen" component={DefaultScreen} options={{ headerShown: false }} />
       <Tabs.Screen
@@ -38,7 +40,7 @@ const Home = () => {
         component={CreatePostScreen}
         options={{
           headerShown: true,
-          // unmountOnBlur: true,
+          unmountOnBlur: true,
           // tabBarStyle: { display: "none" },
           tabBarButton: (props) => (
             <TouchableOpacity {...props}>

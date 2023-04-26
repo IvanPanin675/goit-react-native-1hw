@@ -42,7 +42,6 @@ export const LoginScreen = ({
   const handleCloseKeyboard = () => {
     setIsShowKeyboard(false);
     Keyboard.dismiss();
-    console.log("dsds");
   };
 
   return (
